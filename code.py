@@ -23,7 +23,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     cp = st.selectbox('Chest Pain Type (cp)', [0, 1, 2, 3])
-    ca = st.number_input('Number of Major Vessels (ca)', 0, 4)
+    ca = st.selectbox('Number of Major Vessels (ca)', [0, 1, 2, 3, 4])  # Changed to selectbox
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
@@ -37,7 +37,7 @@ with col3:
 input_data = {
     'cp': cp,
     'thal': thal,
-    'ca': ca,
+    'ca': ca,  # No need to handle differently since it is now a selectbox
     'age': age if age is not None else 0,  # Handle None
     'oldpeak': oldpeak if oldpeak is not None else 0.0,  # Handle None
     'chol': chol if chol is not None else 126  # Handle None
