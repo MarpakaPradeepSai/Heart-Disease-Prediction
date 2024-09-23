@@ -32,8 +32,8 @@ with col2:
     age = st.number_input('Age', min_value=1, value=1)  # Minimum age is set to 1
 
 with col3:
-    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)  # Allow zero
-    chol = st.number_input('Cholesterol (chol)', min_value=127, max_value=564, value=127)  # Minimum set to 127
+    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)
+    chol = st.number_input('Cholesterol (chol)', min_value=127, max_value=564, value=127)
 
 # Collect input data
 input_data = {
@@ -49,28 +49,28 @@ input_data = {
 st.markdown("""
     <style>
     .stButton > button {
-        background-color: #007bff; /* Bootstrap primary blue */
-        color: white !important; /* Text color */
+        background-color: #007bff;
+        color: white !important;
         border: none;
-        transition: none; /* Remove all transitions */
+        transition: none;
     }
     .stButton > button:focus,
     .stButton > button:active,
     .stButton > button:hover {
-        outline: none; /* Remove focus outline */
-        background-color: #007bff !important; /* Keep blue color on focus and active */
-        color: white !important; /* Keep text color */
+        outline: none;
+        background-color: #007bff !important;
+        color: white !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
 # Predict button
 if st.button('Predict 🔍'):
-    # Check if all required fields are filled correctly
-    if age < 1 or chol < 127:
-        st.error("⚠️ Please fill in all fields with appropriate values before making a prediction.")
+    # Check if age is less than 1 before making a prediction
+    if age < 1:
+        st.error("⚠️ Age must be at least 1. Please provide a valid age.")
     else:
-        # Only proceed with prediction if conditions are met
+        # Proceed with prediction if all conditions are met
         prediction = predict(input_data)
         if prediction == 1:
             st.markdown("""
@@ -88,4 +88,3 @@ if st.button('Predict 🔍'):
                     <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
                 </div>
             """, unsafe_allow_html=True)
-
