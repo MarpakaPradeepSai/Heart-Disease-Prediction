@@ -15,7 +15,7 @@ def predict(input_data):
     return prediction[0]
 
 # Streamlit app
-st.title('Heart Disease Prediction App 🫀💔')
+st.title('Heart Disease Prediction App 🫀')
 st.write("Enter the details below to check your heart disease risk. 📝")
 
 # Input fields for the features organized in columns
