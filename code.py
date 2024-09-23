@@ -29,11 +29,11 @@ with col2:
     thal = st.selectbox('Thalassemia (thal)', 
                         options=[(0, 'Normal'), (1, 'Fixed Defect'), (2, 'Reversible Defect')],
                         format_func=lambda x: x[1])
-    age = st.number_input('Age', min_value=1, value=1)  # Minimum age is set to 1
+    age = st.number_input('Age', min_value=None, value=None)  # Allow blank input for age
 
 with col3:
     oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)
-    chol = st.number_input('Cholesterol (chol)', min_value=127, max_value=564, value=127)
+    chol = st.number_input('Cholesterol (chol)', min_value=None, value=None)  # Allow blank input for cholesterol
 
 # Collect input data
 input_data = {
@@ -49,25 +49,27 @@ input_data = {
 st.markdown("""
     <style>
     .stButton > button {
-        background-color: #007bff;
-        color: white !important;
+        background-color: #007bff; /* Bootstrap primary blue */
+        color: white !important; /* Text color */
         border: none;
-        transition: none;
+        transition: none; /* Remove all transitions */
     }
     .stButton > button:focus,
     .stButton > button:active,
     .stButton > button:hover {
-        outline: none;
-        background-color: #007bff !important;
-        color: white !important;
+        outline: none; /* Remove focus outline */
+        background-color: #007bff !important; /* Keep blue color on focus and active */
+        color: white !important; /* Keep text color */
     }
     </style>
     """, unsafe_allow_html=True)
 
 # Predict button
 if st.button('Predict 🔍'):
-    # Check if age is less than 1 before making a prediction
-    if age < 1:
+    # Check if age and chol are filled in
+    if age is None or chol is None:
+        st.error("⚠️ Please fill in all fields with appropriate values before making a prediction.")
+    elif age < 1:
         st.error("⚠️ Age must be at least 1. Please provide a valid age.")
     else:
         # Proceed with prediction if all conditions are met
