@@ -1,38 +1,24 @@
+# Create a Streamlit app (save this as app.py)
 import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the model
-model = joblib.load('best_random_forest_model.pkl')
+# Load the saved model and features
+model = joblib.load('heart_disease_model.joblib')
+best_features = joblib.load('best_features.joblib')
 
-# Function to make predictions
-def predict(input_data):
-    prediction = model.predict(input_data)
+def predict_heart_disease(features):
+    prediction = model.predict(pd.DataFrame([features], columns=best_features))
     return prediction[0]
 
-# Streamlit UI
-st.title('Diabetes Prediction App')
+st.title('Heart Disease Prediction App')
 
-# Input fields for each feature
-age = st.number_input('Age', min_value=0)
-cp = st.number_input('Chest Pain Type (0-3)', min_value=0, max_value=3)
-ca = st.number_input('Number of Major Vessels (0-3)', min_value=0, max_value=3)
-thalach = st.number_input('Maximum Heart Rate Achieved', min_value=0)
-oldpeak = st.number_input('Depression Induced by Exercise (in units)', min_value=0.0)
-thal = st.number_input('Thalassemia (1-3)', min_value=1, max_value=3)
+# Create input fields for each feature
+feature_inputs = {}
+for feature in best_features:
+    feature_inputs[feature] = st.number_input(f'Enter {feature}:', value=0.0)
 
-# Create a DataFrame for the input data
-input_data = pd.DataFrame({
-    'age': [age],
-    'cp': [cp],
-    'ca': [ca],
-    'thalach': [thalach],
-    'oldpeak': [oldpeak],
-    'thal': [thal]
-})
-
-# Make prediction when button is pressed
 if st.button('Predict'):
-    result = predict(input_data)
-    st.write(f'Prediction: {"Diabetes" if result == 1 else "No Diabetes"}')
-
+    features = [feature_inputs[feature] for feature in best_features]
+    prediction = predict_heart_disease(features)
+    st.write('Prediction: ', 'Heart Disease' if prediction == 1 else 'No Heart Disease')
