@@ -70,6 +70,7 @@ if st.button('Predict 🔍'):
     if age < 1 or chol < 127:
         st.error("⚠️ Please fill in all fields with appropriate values before making a prediction.")
     else:
+        # Only proceed with prediction if conditions are met
         prediction = predict(input_data)
         if prediction == 1:
             st.markdown("""
