@@ -3,7 +3,7 @@ import joblib
 import pandas as pd
 
 # Load the trained model
-model = joblib.load('best_decision_tree_model.pkl')
+model = joblib.load('best_DTC(Heart).pkl')
 
 # Top features identified
 best_features = ['cp', 'thal', 'ca', 'age', 'oldpeak', 'chol']
