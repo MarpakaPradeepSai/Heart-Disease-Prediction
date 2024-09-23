@@ -75,7 +75,6 @@ if st.button('Predict 🔍'):
                     <h3 style="color:white;">⚠️ <strong>Alert!</strong></h3>
                     <p style="font-size:20px; color:white;">The model indicates a potential <strong>Heart Disease</strong> risk.</p>
                     <p style="color:white;">It's crucial to seek advice from a healthcare professional.</p>
-                    <img src="https://example.com/heart_warning.png" style="width:50%; max-width:300px;" alt="Heart Warning">
                 </div>
             """, unsafe_allow_html=True)
         else:
@@ -84,6 +83,5 @@ if st.button('Predict 🔍'):
                     <h3 style="color:white;">🎉 <strong>Great News!</strong></h3>
                     <p style="font-size:20px; color:white;">The model predicts: <strong>No Heart Disease</strong></p>
                     <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
-                    <img src="https://example.com/heart_healthy.png" style="width:50%; max-width:300px;" alt="Heart Healthy">
                 </div>
             """, unsafe_allow_html=True)
