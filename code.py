@@ -88,3 +88,4 @@ if st.button('Predict 🔍'):
                     <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
                 </div>
             """, unsafe_allow_html=True)
+
