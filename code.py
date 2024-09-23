@@ -1,36 +1,38 @@
 import streamlit as st
-import joblib
 import pandas as pd
+import joblib
 
-# Load the trained model
-model = joblib.load('best_DTC(Heart).pkl')
-
-# Top features identified
-best_features = ['cp', 'thal', 'ca', 'age', 'oldpeak', 'chol']
+# Load the model
+model = joblib.load('best_random_forest_model.pkl')
 
 # Function to make predictions
-def predict(features):
-    return model.predict([features])
+def predict(input_data):
+    prediction = model.predict(input_data)
+    return prediction[0]
 
-# Streamlit app layout
-st.title("Heart Disease Prediction")
-st.write("Enter the details below:")
+# Streamlit UI
+st.title('Diabetes Prediction App')
 
-# Input fields for the best features
-cp = st.selectbox("Chest Pain Type", options=[0, 1, 2, 3])
-thal = st.selectbox("Thalassemia", options=[0, 1, 2, 3])
-ca = st.selectbox("Number of Major Vessels (0-3) Colored by Fluoroscopy", options=[0, 1, 2, 3])
-age = st.number_input("Age", min_value=1, max_value=120)
-oldpeak = st.number_input("ST Depression Induced by Exercise", min_value=0.0, max_value=6.0)
-chol = st.number_input("Cholesterol", min_value=100, max_value=600)
+# Input fields for each feature
+age = st.number_input('Age', min_value=0)
+cp = st.number_input('Chest Pain Type (0-3)', min_value=0, max_value=3)
+ca = st.number_input('Number of Major Vessels (0-3)', min_value=0, max_value=3)
+thalach = st.number_input('Maximum Heart Rate Achieved', min_value=0)
+oldpeak = st.number_input('Depression Induced by Exercise (in units)', min_value=0.0)
+thal = st.number_input('Thalassemia (1-3)', min_value=1, max_value=3)
 
-# Button to predict
-if st.button("Predict"):
-    features = [cp, thal, ca, age, oldpeak, chol]
-    prediction = predict(features)
-    
-    # Show the prediction result
-    if prediction[0] == 1:
-        st.success("The model predicts: Heart Disease Present")
-    else:
-        st.success("The model predicts: No Heart Disease")
+# Create a DataFrame for the input data
+input_data = pd.DataFrame({
+    'age': [age],
+    'cp': [cp],
+    'ca': [ca],
+    'thalach': [thalach],
+    'oldpeak': [oldpeak],
+    'thal': [thal]
+})
+
+# Make prediction when button is pressed
+if st.button('Predict'):
+    result = predict(input_data)
+    st.write(f'Prediction: {"Diabetes" if result == 1 else "No Diabetes"}')
+
