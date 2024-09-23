@@ -27,7 +27,7 @@ with col1:
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
-    age = st.number_input('Age', min_value=1, value=None)  # Minimum age is set to 1
+    age = st.number_input('Age', min_value=1, value=1)  # Minimum age is set to 1
 
 with col3:
     oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)  # Allow zero
