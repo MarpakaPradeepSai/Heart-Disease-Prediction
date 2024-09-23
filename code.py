@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import joblib
-import matplotlib.pyplot as plt
 
 # Load the trained model
 model = joblib.load('best_DTC(Heart).pkl')
@@ -24,27 +23,27 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     cp = st.selectbox('Chest Pain Type (cp)', [0, 1, 2, 3])
-    ca = st.selectbox('Number of Major Vessels (ca)', [0, 1, 2, 3, 4])
+    ca = st.selectbox('Number of Major Vessels (ca)', [0, 1, 2, 3, 4])  # Changed to selectbox
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
-    age = st.number_input('Age', min_value=0, value=40)
+    age = st.number_input('Age', min_value=0, value=None)  # Make Age field blank
 
 with col3:
-    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=1.0)
-    chol = st.number_input('Cholesterol (chol)', min_value=126, max_value=564, value=200)
+    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=None)
+    chol = st.number_input('Cholesterol (chol)', min_value=126, max_value=564, value=None)
 
 # Collect input data
 input_data = {
     'cp': cp,
     'thal': thal,
     'ca': ca,
-    'age': age,
-    'oldpeak': oldpeak,
-    'chol': chol
+    'age': age if age is not None else 0,
+    'oldpeak': oldpeak if oldpeak is not None else 0.0,
+    'chol': chol if chol is not None else 126
 }
 
-# Add custom CSS for button style
+# Add custom CSS to change button color without hover or active effect
 st.markdown("""
     <style>
     .stButton > button {
@@ -57,7 +56,7 @@ st.markdown("""
     .stButton > button:active,
     .stButton > button:hover {
         outline: none; /* Remove focus outline */
-        background-color: #007bff !important; /* Keep blue color */
+        background-color: #007bff !important; /* Keep blue color on focus and active */
         color: white !important; /* Keep text color */
     }
     </style>
@@ -66,47 +65,21 @@ st.markdown("""
 # Predict button
 if st.button('Predict 🔍'):
     prediction = predict(input_data)
-    
-    # Add a personalized message based on prediction
     if prediction == 1:
         st.markdown("""
             <div style="background-color:red; padding:20px; text-align:center; border-radius:10px;">
-                <h3 style="color:white;">⚠️ <strong>Warning!</strong></h3>
-                <p style="font-size:18px; color:white;">The model predicts: <strong>Heart Disease</strong></p>
-                <p style="color:white;">Please consult a healthcare professional for advice.</p>
+                <h3 style="color:white;">⚠️ <strong>Alert!</strong></h3>
+                <p style="font-size:20px; color:white;">The model indicates a potential <strong>Heart Disease</strong> risk.</p>
+                <p style="color:white;">It's crucial to seek advice from a healthcare professional.</p>
+                <img src="https://example.com/heart_warning.png" style="width:50%; max-width:300px;" alt="Heart Warning">
             </div>
         """, unsafe_allow_html=True)
-        
-        # Visualization of risk factors
-        st.subheader("Risk Factors Breakdown")
-        plt.figure(figsize=(8, 4))
-        plt.bar(input_data.keys(), input_data.values(), color='orange')
-        plt.title('Input Feature Values Contributing to Risk')
-        plt.xlabel('Features')
-        plt.ylabel('Values')
-        st.pyplot(plt)
-        
-        st.write("**Recommended Actions:**")
-        st.write("- Schedule a check-up with your doctor.")
-        st.write("- Consider lifestyle changes: diet and exercise.")
-        
     else:
         st.markdown("""
             <div style="background-color:green; padding:20px; text-align:center; border-radius:10px;">
-                <h3 style="color:white;">✅ <strong>Good News!</strong></h3>
-                <p style="font-size:18px; color:white;">The model predicts: <strong>No Heart Disease</strong></p>
-                <p style="color:white;">Keep up the healthy habits!</p>
+                <h3 style="color:white;">🎉 <strong>Great News!</strong></h3>
+                <p style="font-size:20px; color:white;">The model predicts: <strong>No Heart Disease</strong></p>
+                <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
+                <img src="https://example.com/heart_healthy.png" style="width:50%; max-width:300px;" alt="Heart Healthy">
             </div>
         """, unsafe_allow_html=True)
-
-        # Visualization of risk factors
-        st.subheader("Input Feature Values")
-        plt.figure(figsize=(8, 4))
-        plt.bar(input_data.keys(), input_data.values(), color='lightgreen')
-        plt.title('Input Feature Values for Heart Health')
-        plt.xlabel('Features')
-        plt.ylabel('Values')
-        st.pyplot(plt)
-
-        st.write("**Keep it Up!**")
-        st.write("- Continue with your healthy lifestyle choices.")
