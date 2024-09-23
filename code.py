@@ -27,10 +27,10 @@ with col1:
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
-    age = st.number_input('Age', 29, 77)
+    age = st.number_input('Age')
 
 with col3:
-    oldpeak = st.number_input('Oldpeak (depression induced by exercise relative to rest)', min_value=0.0, max_value=6.2, value=None)
+    oldpeak = st.number_input('Oldpeak (exercise-induced drop)'), min_value=0.0, max_value=6.2, value=None)
     chol = st.number_input('Cholesterol (chol)', min_value=126, max_value=564, value=None)
 
 # Collect input data
