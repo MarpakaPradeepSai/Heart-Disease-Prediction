@@ -27,7 +27,7 @@ with col1:
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
-    age = st.number_input('Age')
+    age = st.number_input('Age', min_value=0, value=None)  # Make Age field blank
 
 with col3:
     oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=None)
@@ -38,7 +38,7 @@ input_data = {
     'cp': cp,
     'thal': thal,
     'ca': ca,
-    'age': age,
+    'age': age if age is not None else 0,  # Handle None
     'oldpeak': oldpeak if oldpeak is not None else 0.0,  # Handle None
     'chol': chol if chol is not None else 126  # Handle None
 }
