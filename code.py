@@ -26,7 +26,9 @@ with col1:
     ca = st.selectbox('Number of Major Vessels (ca)', [0, 1, 2, 3, 4])
 
 with col2:
-    thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
+    thal = st.selectbox('Thalassemia (thal)', 
+                        options=[(0, 'Normal'), (1, 'Fixed Defect'), (2, 'Reversible Defect')],
+                        format_func=lambda x: x[1])
     age = st.number_input('Age', min_value=1, value=1)  # Minimum age is set to 1
 
 with col3:
@@ -36,7 +38,7 @@ with col3:
 # Collect input data
 input_data = {
     'cp': cp,
-    'thal': thal,
+    'thal': thal[0],  # Get the value from the tuple
     'ca': ca,
     'age': age,
     'oldpeak': oldpeak,
