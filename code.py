@@ -27,11 +27,11 @@ with col1:
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
-    age = st.number_input('Age', min_value=0, value=0)  # Default to 0
+    age = st.number_input('Age', min_value=1, value=1)  # Minimum age is set to 1
 
 with col3:
-    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)  # Default to 0.0
-    chol = st.number_input('Cholesterol (chol)', min_value=126, max_value=564, value=126)  # Default to 126
+    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.1, max_value=6.2, value=0.1)  # Minimum set to 0.1
+    chol = st.number_input('Cholesterol (chol)', min_value=127, max_value=564, value=127)  # Minimum set to 127
 
 # Collect input data
 input_data = {
@@ -64,8 +64,8 @@ st.markdown("""
 
 # Predict button
 if st.button('Predict 🔍'):
-    # Check if all fields are filled
-    if None in input_data.values() or any(value == 0 for value in input_data.values()):
+    # Check if all required fields are filled
+    if age < 1 or oldpeak < 0.1 or chol < 127:
         st.error("⚠️ Please fill in all fields with appropriate values before making a prediction.")
     else:
         prediction = predict(input_data)
