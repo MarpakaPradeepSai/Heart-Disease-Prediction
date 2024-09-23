@@ -30,8 +30,8 @@ with col2:
     age = st.number_input('Age', 29, 77)
 
 with col3:
-    oldpeak = st.number_input('Oldpeak (depression induced by exercise relative to rest)', 0.0, 6.2)
-    chol = st.number_input('Cholesterol (chol)', 126, 564)
+    oldpeak = st.number_input('Oldpeak (depression induced by exercise relative to rest)', min_value=0.0, max_value=6.2, value=None)
+    chol = st.number_input('Cholesterol (chol)', min_value=126, max_value=564, value=None)
 
 # Collect input data
 input_data = {
@@ -39,8 +39,8 @@ input_data = {
     'thal': thal,
     'ca': ca,
     'age': age,
-    'oldpeak': oldpeak,
-    'chol': chol
+    'oldpeak': oldpeak if oldpeak is not None else 0.0,  # Handle None
+    'chol': chol if chol is not None else 126  # Handle None
 }
 
 # Add custom CSS to change button color without hover or active effect
