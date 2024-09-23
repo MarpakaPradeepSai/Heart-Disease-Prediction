@@ -64,22 +64,26 @@ st.markdown("""
 
 # Predict button
 if st.button('Predict 🔍'):
-    prediction = predict(input_data)
-    if prediction == 1:
-        st.markdown("""
-            <div style="background-color:red; padding:20px; text-align:center; border-radius:10px;">
-                <h3 style="color:white;">⚠️ <strong>Alert!</strong></h3>
-                <p style="font-size:20px; color:white;">The model indicates a potential <strong>Heart Disease</strong> risk.</p>
-                <p style="color:white;">It's crucial to seek advice from a healthcare professional.</p>
-                <img src="https://example.com/heart_warning.png" style="width:50%; max-width:300px;" alt="Heart Warning">
-            </div>
-        """, unsafe_allow_html=True)
+    # Check if at least one input is filled
+    if all(value is None for value in input_data.values()):
+        st.error("⚠️ Please enter at least one value to make a prediction.")
     else:
-        st.markdown("""
-            <div style="background-color:green; padding:20px; text-align:center; border-radius:10px;">
-                <h3 style="color:white;">🎉 <strong>Great News!</strong></h3>
-                <p style="font-size:20px; color:white;">The model predicts: <strong>No Heart Disease</strong></p>
-                <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
-                <img src="https://example.com/heart_healthy.png" style="width:50%; max-width:300px;" alt="Heart Healthy">
-            </div>
-        """, unsafe_allow_html=True)
+        prediction = predict(input_data)
+        if prediction == 1:
+            st.markdown("""
+                <div style="background-color:red; padding:20px; text-align:center; border-radius:10px;">
+                    <h3 style="color:white;">⚠️ <strong>Alert!</strong></h3>
+                    <p style="font-size:20px; color:white;">The model indicates a potential <strong>Heart Disease</strong> risk.</p>
+                    <p style="color:white;">It's crucial to seek advice from a healthcare professional.</p>
+                    <img src="https://example.com/heart_warning.png" style="width:50%; max-width:300px;" alt="Heart Warning">
+                </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown("""
+                <div style="background-color:green; padding:20px; text-align:center; border-radius:10px;">
+                    <h3 style="color:white;">🎉 <strong>Great News!</strong></h3>
+                    <p style="font-size:20px; color:white;">The model predicts: <strong>No Heart Disease</strong></p>
+                    <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
+                    <img src="https://example.com/heart_healthy.png" style="width:50%; max-width:300px;" alt="Heart Healthy">
+                </div>
+            """, unsafe_allow_html=True)
