@@ -1,9 +1,9 @@
 import streamlit as st
-import pandas as pd
 import joblib
 
-# Load your model
-model = joblib.load('decision_tree_model.pkl')
+# Load your best model
+model_filename = 'best_DTC(Heart).joblib'
+model = joblib.load(model_filename)
 
 # Define the function to make predictions
 def predict(features):
