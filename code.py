@@ -67,7 +67,7 @@ st.markdown("""
 # Predict button
 if st.button('Predict 🔍'):
     # Check if all required fields are filled
-    if age < 1 or chol < 127:
+    if age < 1 or chol < 126:
         st.error("⚠️ Please fill in all fields with appropriate values before making a prediction.")
     else:
         prediction = predict(input_data)
