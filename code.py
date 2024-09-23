@@ -8,7 +8,9 @@ model = joblib.load(model_filename)
 
 # Define the function to make predictions
 def predict(features):
-    return model.predict([features])[0]
+    # Ensure features are in the correct shape for prediction
+    input_data = pd.DataFrame([features], columns=['age', 'cp', 'thal', 'ca', 'oldpeak', 'chol'])
+    return model.predict(input_data)[0]
 
 # Define the main function for the Streamlit app
 def main():
