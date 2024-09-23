@@ -29,11 +29,11 @@ with col2:
     thal = st.selectbox('Thalassemia (thal)', 
                         options=[(0, 'Normal'), (1, 'Fixed Defect'), (2, 'Reversible Defect')],
                         format_func=lambda x: x[1])
-    age = st.number_input('Age', min_value=None, value=None)  # Allow blank input for age
+    age = st.number_input('Age', min_value=1, value=None, step=1)  # Only integer input for age
 
 with col3:
     oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)
-    chol = st.number_input('Cholesterol (chol)', min_value=None, value=None)  # Allow blank input for cholesterol
+    chol = st.number_input('Cholesterol (chol)', min_value=127, value=None)  # Allow decimal input for cholesterol
 
 # Collect input data
 input_data = {
