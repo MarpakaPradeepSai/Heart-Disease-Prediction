@@ -23,24 +23,24 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     cp = st.selectbox('Chest Pain Type (cp)', [0, 1, 2, 3])
-    ca = st.selectbox('Number of Major Vessels (ca)', [0, 1, 2, 3, 4])  # Changed to selectbox
+    ca = st.selectbox('Number of Major Vessels (ca)', [0, 1, 2, 3, 4])
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', [0, 1, 2, 3])
-    age = st.number_input('Age', min_value=0, value=None)  # Make Age field blank
+    age = st.number_input('Age', min_value=0, value=0)  # Default to 0
 
 with col3:
-    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=None)
-    chol = st.number_input('Cholesterol (chol)', min_value=126, max_value=564, value=None)
+    oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)  # Default to 0.0
+    chol = st.number_input('Cholesterol (chol)', min_value=126, max_value=564, value=126)  # Default to 126
 
 # Collect input data
 input_data = {
     'cp': cp,
     'thal': thal,
     'ca': ca,
-    'age': age if age is not None else 0,
-    'oldpeak': oldpeak if oldpeak is not None else 0.0,
-    'chol': chol if chol is not None else 126
+    'age': age,
+    'oldpeak': oldpeak,
+    'chol': chol
 }
 
 # Add custom CSS to change button color without hover or active effect
@@ -64,9 +64,9 @@ st.markdown("""
 
 # Predict button
 if st.button('Predict 🔍'):
-    # Check if at least one input is filled
-    if all(value is None for value in input_data.values()):
-        st.error("⚠️ Please enter at least one value to make a prediction.")
+    # Check if all fields are filled
+    if None in input_data.values() or any(value == 0 for value in input_data.values()):
+        st.error("⚠️ Please fill in all fields with appropriate values before making a prediction.")
     else:
         prediction = predict(input_data)
         if prediction == 1:
