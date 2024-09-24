@@ -27,7 +27,7 @@ with col1:
 
 with col2:
     thal = st.selectbox('Thalassemia (thal)', 
-                        options=[(0, 'Normal(0)'), (1, 'Fixed Defect(1)'), (2, 'Reversible Defect(2)')],
+                        options=[(0, 'Normal (0)'), (1, 'Fixed Defect (1)'), (2, 'Reversible Defect (2)')],
                         format_func=lambda x: x[1])
     age = st.number_input('Age', min_value=1, value=None, step=1)  # Only integer input for age
 
