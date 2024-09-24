@@ -86,7 +86,7 @@ if st.button('Predict 🔍'):
             st.markdown("""
                 <div style="background-color:green; padding:20px; text-align:center; border-radius:10px;">
                     <h3 style="color:white;">🎉 <strong>Great News!</strong></h3>
-                    <p style="font-size:20px; color:white;">The model predicts: <strong>No Heart Disease</strong></p>
+                    <p style="font-size:18px; color:white;">You have a <strong>low risk</strong> of heart disease.</p>
                     <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
                 </div>
             """, unsafe_allow_html=True)
