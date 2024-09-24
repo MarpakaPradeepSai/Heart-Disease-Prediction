@@ -79,7 +79,7 @@ if st.button('Predict 🔍'):
                 <div style="background-color:red; padding:20px; text-align:center; border-radius:10px;">
                     <h3 style="color:white;">⚠️ <strong>Alert!</strong></h3>
                     <p style="font-size:18px; color:white;">You have a <strong>high risk</strong> of Heart disease.</p>
-                    <p style="color:white;">It's crucial to seek advice from a healthcare professional.</p>
+                    <p style="font-size:18px; color:white;">It's crucial to seek advice from a healthcare professional.</p>
                 </div>
             """, unsafe_allow_html=True)
         else:
@@ -87,6 +87,6 @@ if st.button('Predict 🔍'):
                 <div style="background-color:green; padding:20px; text-align:center; border-radius:10px;">
                     <h3 style="color:white;">🎉 <strong>Great News!</strong></h3>
                     <p style="font-size:18px; color:white;">You have a <strong>low risk</strong> of heart disease.</p>
-                    <p style="color:white;">Keep nurturing your heart with healthy choices! 💚</p>
+                    <p style="font-size:18px; color:white;">Keep nurturing your heart with healthy choices! 💚</p>
                 </div>
             """, unsafe_allow_html=True)
