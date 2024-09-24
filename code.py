@@ -33,7 +33,7 @@ with col2:
 
 with col3:
     oldpeak = st.number_input('Oldpeak (exercise-induced drop)', min_value=0.0, max_value=6.2, value=0.0)
-    chol = st.number_input('Cholesterol (chol)', min_value=126, value=None)  # Allow decimal input for cholesterol
+    chol = st.number_input('Cholesterol (chol)', min_value=0.0, value=None)  # Accept any positive value for cholesterol
 
 # Collect input data
 input_data = {
